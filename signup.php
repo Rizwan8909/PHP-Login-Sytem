@@ -88,11 +88,11 @@
             <form action="/Login/signup.php" method="post">
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control " id="username" name="username" autocomplete="off">
+                    <input type="text" maxlength="20" class="form-control " id="username" name="username" autocomplete="off">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control " id="password" name="password">
+                    <input type="password" maxlength="20" class="form-control " id="password" name="password">
                 </div>
                 <div class="form-group">
                     <label for="cpassword">Confirm Password</label>
