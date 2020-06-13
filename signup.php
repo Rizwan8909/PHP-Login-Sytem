@@ -8,6 +8,10 @@
         $username = $_POST['username'];
         $password = $_POST['password'];
         $cpassword = $_POST['cpassword'];
+
+
+        // Hasing the password
+        $hash = password_hash($password, PASSWORD_DEFAULT);
         // $exists = false;
 
         // Query to check whether username already exists or not
@@ -22,10 +26,14 @@
 
         else{
 
-
+            // Actual registeration starts from her
             // && $exists == false
             if(($password == $cpassword)){
-                $sql = "INSERT INTO `user124` (`username`, `password`, `date`) VALUES ( '$username', '$password', current_timestamp())";
+
+                // Don't forget to change the column of password in the database to length 255
+                // $sql = "INSERT INTO `user124` (`username`, `password`, `date`) VALUES ( '$username', '$password', current_timestamp())";
+                $sql = "INSERT INTO `user124` (`username`, `password`, `date`) VALUES ( '$username', '$hash', current_timestamp())";
+
                 $result = mysqli_query($conn, $sql);
                 if($result){
                     $showAlert = true;

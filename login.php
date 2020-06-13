@@ -8,21 +8,49 @@
         $password = $_POST['password'];
  
 
-        $sql = "SELECT * FROM `user124` WHERE `username` = '$username' AND `password` = '$password'";
+        // $sql = "SELECT * FROM `user124` WHERE `username` = '$username' AND `password` = '$password'";
+        $sql = "SELECT * FROM `user124` WHERE `username` = '$username'";
         $result = mysqli_query($conn, $sql);
         $num = mysqli_num_rows($result);
+
+        // if($num == 1){
+        //     $login = true;
+        //     // Creating session for the user
+        //     session_start();
+        //     $_SESSION['loggedin'] = true;
+        //     $_SESSION['username'] = $username;
+        //     header("location: welcome.php");
+        // }   
+        
+        // else{
+        //     $showErrorAlert = "Wrong credentials";
+        // }
+
         if($num == 1){
-            $login = true;
-            // Creating session for the user
-            session_start();
-            $_SESSION['loggedin'] = true;
-            $_SESSION['username'] = $username;
-            header("location: welcome.php");
-        }   
+
+            while($row= mysqli_fetch_assoc($result)){
+                if(password_verify($password, $row['password'])){
+                    $login = true;
+              
+                // Creating session for the user
+                    session_start();
+                    $_SESSION['loggedin'] = true;
+                    $_SESSION['username'] = $username;
+                    header("location: welcome.php");
+                }
+
+                else{
+                    $showErrorAlert = "Wrong credentials";
+                }
+            }   
+        }
         
         else{
             $showErrorAlert = "Wrong credentials";
         }
+
+
+         
     }
 
 ?>
